@@ -1,51 +1,45 @@
-import { type ClientSchema, defineData } from "@aws-amplify/backend";
-import schema from "./schema"; // Adjust the import path as necessary
+import { a, ClientSchema } from "@aws-amplify/backend";
+import {
+  Stack,
+  StackProps,
+  aws_dynamodb as dynamodb,
+  aws_iam as iam
+} from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 
-/*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any user authenticated via an API key can "create", "read",
-"update", and "delete" any "Todo" records.
-=========================================================================*/
+export class ResourceStack extends Stack {
+  public readonly table: dynamodb.Table;
 
-export type Schema = ClientSchema<typeof schema>;
+  constructor(scope: Construct, id: string, props?: StackProps) {
+    super(scope, id, props);
 
-export const data = defineData({
-  schema,
-  authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
-    // API Key is used for a.allow.public() rules
-    apiKeyAuthorizationMode: {
-      expiresInDays: 30,
-    },
-  },
-});
+    // Initialize the DynamoDB table
+    this.table = new dynamodb.Table(this, 'MyTable', {
+      partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+    });
 
-/*== STEP 2 ===============================================================
-Go to your frontend source code. From your client-side code, generate a
-Data client to make CRUDL requests to your table. (THIS SNIPPET WILL ONLY
-WORK IN THE FRONTEND CODE FILE.)
+    // Define the schema
+    const schema = a.schema({
+      Todo: a.model({
+        content: a.string(),
+      }).authorization(allow => [allow.owner()]),
+    });
 
-Using JavaScript or Next.js React Server Components, Middleware, Server 
-Actions or Pages Router? Review how to generate Data clients for those use
-cases: https://docs.amplify.aws/gen2/build-a-backend/data/connect-to-API/
-=========================================================================*/
+    // Define Schema type
+    type Schema = ClientSchema<typeof schema>;
 
-/*
-"use client"
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
+    // Create IAM role
+    const role = new iam.Role(this, 'MyRole', {
+      assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com')
+    });
 
-const client = generateClient<Schema>() // use this Data client for CRUDL requests
-*/
+    role.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['dynamodb:GetItem', 'dynamodb:PutItem'],
+      resources: [this.table.tableArn]
+    }));
+  }
+}
 
-/*== STEP 3 ===============================================================
-Fetch records from the database and use them in your frontend component.
-(THIS SNIPPET WILL ONLY WORK IN THE FRONTEND CODE FILE.)
-=========================================================================*/
-
-/* For example, in a React component, you can use this snippet in your
-  function's RETURN statement */
-// const { data: todos } = await client.models.Todo.list()
-
-// return <ul>{todos.map(todo => <li key={todo.id}>{todo.content}</li>)}</ul>
+// Named export for the type alias
+export type { ClientSchema as Schema };

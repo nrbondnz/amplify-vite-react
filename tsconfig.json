@@ -18,7 +18,49 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "sourceMap": true,
+    "baseUrl": "./",
+    // Base directory for non-relative module names
+    "types": [
+      "./src/types/global"
+    ],
+    // Specify types directory
+    "paths": {
+      "@*": [
+        "src/*"
+      ],
+      "@reducers/*": [
+        "src/reducers/*"
+      ],
+      // Alias for 'reducers'
+      "@components/*": [
+        "src/components/*"
+      ],
+      // Alias for 'components'
+      "@shared/*": [
+        "src/shared/*"
+      ],
+      // Alias for 'shared'
+      "@appcontext/*": [
+        "src/context/*"
+      ],
+      // Alias for 'appcontext'
+      "@controller/*": [
+        "src/controller/*"
+      ],
+      // Alias for 'controller'
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      // Alias for 'utils'
+      "@amplify/*": [
+        "amplify/*"
+      ]
+      // Alias for 'amplify'
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
