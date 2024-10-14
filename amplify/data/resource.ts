@@ -47,7 +47,7 @@ export class ResourceStack extends Stack {
     app.use(json());
 
     // Example route to fetch data
-    app.get('/api/data', (req, res) => {
+    app.get('/api/data', (_req, res) => {
       res.json({ message: 'Data fetched successfully' });
     });
 
