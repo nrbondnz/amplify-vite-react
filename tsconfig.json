@@ -32,9 +32,6 @@
       "@*": [
         "src/*"
       ],
-      "@reducers/*": [
-        "src/reducers/*"
-      ],
       // Alias for 'reducers'
       "@components/*": [
         "src/components/*"
@@ -43,22 +40,7 @@
       "@shared/*": [
         "src/shared/*"
       ],
-      // Alias for 'shared'
-      "@appcontext/*": [
-        "src/context/*"
-      ],
-      // Alias for 'appcontext'
-      "@controller/*": [
-        "src/controller/*"
-      ],
-      // Alias for 'controller'
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      // Alias for 'utils'
-      "@amplify/*": [
-        "amplify/*"
-      ]
+ 
       // Alias for 'amplify'
     }
   },

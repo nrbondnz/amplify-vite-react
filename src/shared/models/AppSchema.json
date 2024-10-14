@@ -1,0 +1,198 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IDataState",
+  "type": "object",
+  "properties": {
+    "machines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IMachine"
+      }
+    },
+    "exercises": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IExercise"
+      }
+    },
+    "users": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IUser"
+      }
+    },
+    "workouts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IWorkout"
+      }
+    },
+    "userWorkoutExercises": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IUserWorkoutExercise"
+      }
+    },
+    "actionStates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IActionState"
+      }
+    },
+    "userExercises": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IUserExercise"
+      }
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ILocation"
+      }
+    },
+    "muscles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IMuscle"
+      }
+    },
+    "loading": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "machines",
+    "exercises",
+    "users",
+    "workouts",
+    "userWorkoutExercises",
+    "actionStates",
+    "userExercises",
+    "locations",
+    "muscles",
+    "loading"
+  ],
+  "definitions": {
+    "IMachine": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "numOfMachine": { "type": "number" },
+        "idLocation": { "type": "number" },
+        "settings": {
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        }
+      },
+      "required": ["id", "name", "numOfMachine", "idLocation", "settings"]
+    },
+    "IExercise": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "idMachine": { "type": "number" },
+        "description": { "type": "string" }
+      },
+      "required": ["id", "name", "idMachine", "description"]
+    },
+    "IUser": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "idLocation": { "type": "number" },
+        "roles": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["id", "name", "email", "phoneNumber", "idLocation", "roles"]
+    },
+    "IWorkout": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "idUser": { "type": "number" },
+        "name": { "type": "string" }
+      },
+      "required": ["id", "idUser", "name"]
+    },
+    "IUserWorkoutExercise": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "idUser": { "type": "number" },
+        "idWorkout": { "type": "number" },
+        "idMachine": { "type": "number" },
+        "idExercise": { "type": "number" },
+        "max": { "type": "string" },
+        "settings": {
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        }
+      },
+      "required": ["id", "name", "idUser", "idWorkout", "idMachine", "idExercise", "max", "settings"]
+    },
+    "IActionState": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "LOADED": { "type": "string" },
+        "appPage": { "type": "string" },
+        "appCommand": { "type": "string" },
+        "primId": { "type": "number" },
+        "primObj": { "type": "object" },
+        "primName": { "type": "string" },
+        "secId": { "type": "number" },
+        "secObj": { "type": "object" },
+        "secName": { "type": "string" }
+      },
+      "required": ["id", "LOADED"]
+    },
+    "IUserExercise": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "idUser": { "type": "number" },
+        "idExercise": { "type": "number" }
+      },
+      "required": ["id", "idUser", "idExercise"]
+    },
+    "IMuscle": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "numOfMuscle": { "type": "number" },
+        "description": { "type": "string" },
+        "parent": {
+          "type": "number",
+          "nullable": true
+        }
+      },
+      "required": ["id", "name", "numOfMuscle", "description"]
+    },
+    "ILocation": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "name": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    },
+    "TodoType": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "content": { "type": "string" }
+      },
+      "required": ["id", "content"]
+    }
+  }
+}

@@ -1,4 +1,6 @@
-import { IDataState } from "@shared/types/UserSess";
+
+
+
 
 
 export const appstate_page = {
@@ -56,44 +58,7 @@ export const appstate_command = {
 export type AppstateCommand = typeof appstate_command[keyof typeof appstate_command];
 
 
-export interface IState {
-	users: IUser[];
-	exercises: IExercise[];
-	machines: IMachine[];
-	locations: ILocation[];
-	workouts: IWorkout[];
-	userWorkoutExercises: IUserWorkoutExercise[];
-	userExercises: IUserExercise[];
-	muscles: IMuscle[];
-	actionStates: IActionState[];
-	loading: boolean;
-}
 
-export interface InitialData extends IState {
-	users: IUser[];
-	exercises: IExercise[];
-	locations: ILocation[];
-	machines: IMachine[];
-	muscles: IMuscle[];
-	userExercises: IUserExercise[];
-	userWorkoutExercises: IUserWorkoutExercise[];
-	workouts: IWorkout[];
-	actionStates: IActionState[];
-	loading: boolean;
-}
-
-export const initialState: IState = {
-	users: [],
-	exercises: [],
-	machines: [],
-	locations: [],
-	workouts: [],
-	userWorkoutExercises: [],
-	userExercises: [],
-	muscles: [],
-	actionStates: [],
-	loading: false,
-};
 
 
 export interface IUserWorkoutExercise {
@@ -223,64 +188,6 @@ export const defaultActionState: IActionState = {
 	secName: ""
 }
 
-// Types for different function props
-export interface NewMachineProps {
-	type: "NEW_MACHINE";
-}
-
-export interface EditMachineProps {
-	machine: IMachine;
-}
-
-interface ExerciseSelectorProps {
-	type: "EXERCISE_SELECTOR";
-	payload: {
-		workout: IWorkout;
-	};
-}
-
-export interface ListWorkoutsProps {
-	type: string;
-	payload: {
-		name: string;
-		id: number;
-		value: object;
-	};
-}
-
-export interface NewWorkoutProps {
-	type: string;
-	payload: {
-		idUser: number;
-	};
-}
-
-// Union type for function props
-export type FunctionProps =
-	NewMachineProps
-	| EditMachineProps
-	| ListWorkoutsProps
-	| NewWorkoutProps
-	| ExerciseSelectorProps;
-
-// Optional props
-export interface CompProps {
-	props?: FunctionProps;
-}
-
-
-// Example action creation functions for other entity types
-
-export interface DeleteUsWkExProps {
-	id: number;
-	// Add any other properties if needed
-}
-
-export interface AddExerciseToWorkoutProps {
-	workout: IWorkout;
-	exercise: IExercise;
-}
-
 
 export const defaultMuscle: IMuscle = {
 	id: 0,
@@ -290,7 +197,18 @@ export const defaultMuscle: IMuscle = {
 	parent: undefined,
 };
 
-
+export interface IDataState {
+	machines: IMachine[];
+	exercises: IExercise[];
+	users: IUser[];
+	workouts: IWorkout[];
+	userWorkoutExercises: IUserWorkoutExercise[];
+	actionStates: IActionState[];
+	userExercises: IUserExercise[];
+	locations: ILocation[];
+	muscles: IMuscle[];
+	loading: boolean;
+}
 
 
 export const initialDataInAppState: IDataState = {
