@@ -1,8 +1,4 @@
 
-
-
-
-
 export const appstate_page = {
 	ADMIN_OVERVIEW_PAGE: "ADMIN_OVERVIEW_PAGE",
 	LOGIN_PAGE: "LOGIN_PAGE",
@@ -57,28 +53,24 @@ export const appstate_command = {
 
 export type AppstateCommand = typeof appstate_command[keyof typeof appstate_command];
 
-
-
-
-
 export interface IUserWorkoutExercise {
 	id: number;
 	name: string;
-	idUser: number;
-	idWorkout: number;
-	idMachine: number;
-	idExercise: number;
+	idUser: string;
+	idWorkout: string;
+	idMachine: string;
+	idExercise: string;
 	max: string;
-	settings: Record<string, number>;
+	settings: Record<string, string>;
 }
 
 export const defaultUserWorkEx: IUserWorkoutExercise = {
 	id: 0,
 	name: '',
-	idUser: 0,
-	idWorkout: 0,
-	idMachine: 0,
-	idExercise: 0,
+	idUser: '0',
+	idWorkout: '0',
+	idMachine: '0',
+	idExercise: '0',
 	max: 'Max not set',
 	settings: {},
 };
@@ -86,34 +78,34 @@ export const defaultUserWorkEx: IUserWorkoutExercise = {
 export interface IExercise {
 	id: number;
 	name: string;
-	idMachine: number;
+	idMachine: string;
 	description: string;
 }
 
 export const defaultExercise: IExercise = {
 	id: 0,
 	name: 'default exercise',
-	idMachine: 0,
+	idMachine: '0',
 	description: 'default exercise description',
 };
 
 export interface IMachine {
 	id: number;
 	name: string;
-	numOfMachine: number;
-	idLocation: number;
-	settings: Record<string, number>;
+	numOfMachine: string;
+	idLocation: string;
+	settings: Record<string, string>;
 }
 
 export const defaultMachine: IMachine = {
 	id: 0,
 	name: 'default Machine',
-	numOfMachine: -1,
-	idLocation: 0,
+	numOfMachine: "-1",
+	idLocation: '0',
 	settings: {
-		seat: 1,
-		hands: 2,
-		other: 4
+		seat: "1",
+		hands: "2",
+		other: "4"
 	},
 };
 
@@ -124,17 +116,16 @@ export interface ILocation {
 
 export interface IWorkout {
 	id: number;
-	idUser: number;
+	idUser: string;
 	name: string;
 }
-
 
 export interface IUser {
 	id: number;
 	name: string;
 	email: string;
 	phoneNumber: string;
-	idLocation: number;
+	idLocation: string;
 	roles: string[];
 }
 
@@ -143,22 +134,23 @@ export const defaultUser: IUser = {
 	name: 'default',
 	email: 'default@example.com',
 	phoneNumber: '0275560006',
-	idLocation: 1,
+	idLocation: '1',
 	roles: ['user']
 };
 
 export interface IUserExercise {
 	id: number;
-	idUser: number;
-	idExercise: number;
+	idUser: string;
+	idExercise: string;
 }
 
 export interface IMuscle {
 	id: number;
 	name: string;
-	numOfMuscle: number;
+	numOfMuscle: string;
 	description: string;
-	parent?: number;
+	idParent?: number | undefined; // parent it exists will be the muscle.id
+	// of the parent
 }
 
 export interface IActionState {
@@ -166,36 +158,39 @@ export interface IActionState {
 	LOADED: string;
 	appPage?: string;
 	appCommand?: string;
-	primId?: number;
+	primId?: string;
 	primObj?: object;
 	primName?: string;
-	secId?: number;
+	secId?: string;
 	secObj?: object;
 	secName?: string;
 }
-
 
 export const defaultActionState: IActionState = {
 	id: 1,
 	LOADED: "LOADED",
 	appPage: appstate_page.ADMIN_OVERVIEW_PAGE,
 	appCommand: appstate_command.NO_COMMAND,
-	primId: -1,
+	primId: '-1',
 	primObj: undefined,
 	primName: "",
-	secId: -1,
+	secId: '-1',
 	secObj: undefined,
 	secName: ""
 }
 
-
 export const defaultMuscle: IMuscle = {
 	id: 0,
 	name: 'default Muscle',
-	numOfMuscle: 0,
+	numOfMuscle: "0",
 	description: 'default muscle description',
-	parent: undefined,
+	idParent: undefined,
 };
+
+export const defaultLocation: ILocation = {
+	id:0,
+	name: 'default location',
+}
 
 export interface IDataState {
 	machines: IMachine[];
@@ -210,7 +205,6 @@ export interface IDataState {
 	loading: boolean;
 }
 
-
 export const initialDataInAppState: IDataState = {
 	machines: [],
 	exercises: [],
@@ -223,4 +217,3 @@ export const initialDataInAppState: IDataState = {
 	actionStates: [],
 	loading: false
 };
-

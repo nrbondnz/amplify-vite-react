@@ -11,8 +11,10 @@
     "server": "tsx watch src/server.ts"
   },
   "dependencies": {
+    "@aws-amplify/api": "^6.0.54",
+    "@aws-amplify/auth": "^6.5.2",
     "@aws-amplify/ui-react": "^6.2.0",
-    "aws-amplify": "^6.5.2",
+    "aws-amplify": "^6.6.5",
     "body-parser": "^1.20.3",
     "express": "^4.21.1",
     "react": "^18.2.0",

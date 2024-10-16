@@ -79,11 +79,11 @@
       "properties": {
         "id": { "type": "number" },
         "name": { "type": "string" },
-        "numOfMachine": { "type": "number" },
-        "idLocation": { "type": "number" },
+        "numOfMachine": { "type": "string" },
+        "idLocation": { "type": "string" },
         "settings": {
           "type": "object",
-          "additionalProperties": { "type": "number" }
+          "additionalProperties": { "type": "string" }
         }
       },
       "required": ["id", "name", "numOfMachine", "idLocation", "settings"]
@@ -93,7 +93,7 @@
       "properties": {
         "id": { "type": "number" },
         "name": { "type": "string" },
-        "idMachine": { "type": "number" },
+        "idMachine": { "type": "string" },
         "description": { "type": "string" }
       },
       "required": ["id", "name", "idMachine", "description"]
@@ -105,7 +105,7 @@
         "name": { "type": "string" },
         "email": { "type": "string" },
         "phoneNumber": { "type": "string" },
-        "idLocation": { "type": "number" },
+        "idLocation": { "type": "string" },
         "roles": {
           "type": "array",
           "items": { "type": "string" }
@@ -117,7 +117,7 @@
       "type": "object",
       "properties": {
         "id": { "type": "number" },
-        "idUser": { "type": "number" },
+        "idUser": { "type": "string" },
         "name": { "type": "string" }
       },
       "required": ["id", "idUser", "name"]
@@ -127,14 +127,14 @@
       "properties": {
         "id": { "type": "number" },
         "name": { "type": "string" },
-        "idUser": { "type": "number" },
-        "idWorkout": { "type": "number" },
-        "idMachine": { "type": "number" },
-        "idExercise": { "type": "number" },
+        "idUser": { "type": "string" },
+        "idWorkout": { "type": "string" },
+        "idMachine": { "type": "string" },
+        "idExercise": { "type": "string" },
         "max": { "type": "string" },
         "settings": {
           "type": "object",
-          "additionalProperties": { "type": "number" }
+          "additionalProperties": { "type": "string" }
         }
       },
       "required": ["id", "name", "idUser", "idWorkout", "idMachine", "idExercise", "max", "settings"]
@@ -146,10 +146,10 @@
         "LOADED": { "type": "string" },
         "appPage": { "type": "string" },
         "appCommand": { "type": "string" },
-        "primId": { "type": "number" },
+        "primId": { "type": "string" },
         "primObj": { "type": "object" },
         "primName": { "type": "string" },
-        "secId": { "type": "number" },
+        "secId": { "type": "string" },
         "secObj": { "type": "object" },
         "secName": { "type": "string" }
       },
@@ -159,8 +159,8 @@
       "type": "object",
       "properties": {
         "id": { "type": "number" },
-        "idUser": { "type": "number" },
-        "idExercise": { "type": "number" }
+        "idUser": { "type": "string" },
+        "idExercise": { "type": "string" }
       },
       "required": ["id", "idUser", "idExercise"]
     },
@@ -169,10 +169,10 @@
       "properties": {
         "id": { "type": "number" },
         "name": { "type": "string" },
-        "numOfMuscle": { "type": "number" },
+        "numOfMuscle": { "type": "string" },
         "description": { "type": "string" },
         "parent": {
-          "type": "number",
+          "type": "string",
           "nullable": true
         }
       },
@@ -185,14 +185,6 @@
         "name": { "type": "string" }
       },
       "required": ["id", "name"]
-    },
-    "TodoType": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "content": { "type": "string" }
-      },
-      "required": ["id", "content"]
     }
   }
 }
